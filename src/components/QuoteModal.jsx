@@ -95,61 +95,62 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden animate-fadeIn">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-start sm:items-center justify-center p-2.5 sm:p-6">
+      <div className="relative w-full max-w-lg my-auto bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden animate-fadeIn flex flex-col max-h-[92vh]">
         
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-950 p-6 text-white relative">
+        <div className="bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-950 p-4 sm:p-6 text-white relative shrink-0">
           <button
             type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            aria-label="Close"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
-          <div className="flex items-center gap-2 mb-2">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
               FREE ROOFTOP SURVEY • ZERO OBLIGATION
             </span>
           </div>
 
-          <h3 className="text-xl sm:text-2xl font-black text-white">
+          <h3 className="text-base sm:text-2xl font-black text-white pr-6">
             Book Your Free Solar Assessment
           </h3>
-          <p className="text-xs text-slate-300 mt-1">
+          <p className="text-[11px] sm:text-xs text-slate-300 mt-0.5">
             Horizon Solar Power Solutions • Mayyil, Kannur
           </p>
         </div>
 
-        {/* Modal Body */}
-        <div className="p-6">
+        {/* Modal Body with smooth scrolling */}
+        <div className="p-4 sm:p-6 overflow-y-auto flex-1">
           {submitted ? (
-            <div className="text-center py-6 space-y-4">
-              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-                <CheckCircle2 className="w-10 h-10" />
+            <div className="text-center py-4 sm:py-6 space-y-3 sm:space-y-4">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                <CheckCircle2 className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
 
-              <h4 className="text-xl font-extrabold text-slate-900">
+              <h4 className="text-lg sm:text-xl font-extrabold text-slate-900">
                 Thank You, {formData.name || 'Valued Client'}!
               </h4>
 
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">
-                <span>✓ Sent to WhatsApp & horizonsolarpowersolutions@gmail.com</span>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] sm:text-xs font-semibold">
+                <span>✓ Sent to WhatsApp & Email</span>
               </div>
 
-              <p className="text-sm text-slate-600 max-w-md mx-auto">
+              <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto">
                 Your rooftop survey request has been received. Our solar engineer from our Mayyil office will call you shortly at <strong className="text-slate-900">{formData.phone}</strong>.
               </p>
 
-              <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center">
                 <button
                   type="button"
                   onClick={openWhatsAppDirect}
-                  className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
+                  className="px-5 py-2.5 sm:py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Open WhatsApp Chat Directly</span>
+                  <span>Open WhatsApp Chat</span>
                 </button>
 
                 <button
@@ -158,18 +159,18 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
                     setSubmitted(false);
                     onClose();
                   }}
-                  className="px-5 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition-colors cursor-pointer"
+                  className="px-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   Close
                 </button>
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-1">
                     Your Name *
                   </label>
                   <input
@@ -178,12 +179,12 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
                     placeholder="e.g. Ramesh Kumar"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 sm:py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-1">
                     Mobile Number *
                   </label>
                   <input
@@ -192,34 +193,34 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
                     placeholder="e.g. 99471XXXXX"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 sm:py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                  <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-1">
                     Location in Kannur *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Mayyil, Taliparamba, Chalode"
+                    placeholder="e.g. Mayyil, Taliparamba"
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 sm:py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                    Current Bi-monthly KSEB Bill
+                  <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-1">
+                    2-Month KSEB Bill
                   </label>
                   <select
                     value={formData.bimonthlyBill}
                     onChange={(e) => setFormData({ ...formData, bimonthlyBill: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
+                    className="w-full px-3 py-2 sm:py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
                   >
                     <option value="Under ₹2,000">Under ₹2,000</option>
                     <option value="₹2,000 - ₹4,000">₹2,000 - ₹4,000</option>
@@ -231,13 +232,13 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-1">
                   Solar System Preference
                 </label>
                 <select
                   value={formData.capacity}
                   onChange={(e) => setFormData({ ...formData, capacity: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
+                  className="w-full px-3 py-2 sm:py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
                 >
                   <option value="3 kW System (Max ₹78,000 Subsidy)">3 kW System (Max ₹78,000 Subsidy)</option>
                   <option value="2 kW System (₹60,000 Subsidy)">2 kW System (₹60,000 Subsidy)</option>
@@ -250,23 +251,23 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                  Any Specific Requirements or Roof Type
+                <label className="block text-[11px] sm:text-xs font-bold text-slate-700 uppercase mb-1">
+                  Roof Type / Special Notes
                 </label>
                 <textarea
                   rows="2"
-                  placeholder="e.g. Concrete flat roof, tiled roof, truss work needed, etc."
+                  placeholder="e.g. Concrete flat roof, tiled roof, truss needed..."
                   value={formData.notes}
                   onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-1.5 sm:py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
                 ></textarea>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-1 sm:pt-2">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 disabled:opacity-75 text-white font-black text-sm shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  className="w-full py-3 sm:py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 disabled:opacity-75 text-white font-black text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -282,7 +283,7 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
                 </button>
               </div>
 
-              <div className="text-center text-[11px] text-slate-500 pt-1">
+              <div className="text-center text-[10px] text-slate-500">
                 🔒 Your details are safe with us. We will never spam you.
               </div>
 

@@ -23,7 +23,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-800 antialiased selection:bg-teal-700 selection:text-white font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="min-h-screen flex flex-col bg-white text-slate-800 antialiased selection:bg-teal-700 selection:text-white font-['Plus_Jakarta_Sans',sans-serif] overflow-x-hidden">
       {/* 1. Sleek Navbar */}
       <Navbar onOpenQuoteModal={handleOpenQuoteModal} />
 

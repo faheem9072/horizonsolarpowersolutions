@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, Sparkles, CheckCircle2, Phone, MapPin, Building2, MessageCircle } from 'lucide-react';
+import { X, Send, Sparkles, CheckCircle2, Phone, MapPin, Building2, MessageCircle, Mail, Loader2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { COMPANY_INFO } from '../data/solarData';
 
@@ -17,28 +17,59 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    
+    setIsSubmitting(true);
+
+    const msg = `*NEW SOLAR SITE SURVEY REQUEST*%0A%0A` +
+      `👤 *Name:* ${encodeURIComponent(formData.name)}%0A` +
+      `📞 *Phone:* ${encodeURIComponent(formData.phone)}%0A` +
+      `📍 *Location:* ${encodeURIComponent(formData.location || 'Kannur')}%0A` +
+      `🏠 *Property:* ${encodeURIComponent(formData.propertyType)}%0A` +
+      `⚡ *Bimonthly Bill:* ${encodeURIComponent(formData.bimonthlyBill)}%0A` +
+      `☀️ *System:* ${encodeURIComponent(formData.capacity)}%0A` +
+      `📝 *Notes:* ${encodeURIComponent(formData.notes || 'N/A')}`;
+
+    // 1. Send Email Notification to horizonsolarpowersolutions@gmail.com via FormSubmit
+    try {
+      fetch(`https://formsubmit.co/ajax/${COMPANY_INFO.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `☀️ New Solar Survey Request: ${formData.name} (${formData.phone})`,
+          _template: 'table',
+          _captcha: 'false',
+          'Customer Name': formData.name,
+          'Mobile Number': formData.phone,
+          'Location in Kannur': formData.location || 'Kannur, Kerala',
+          'Current 2-Month KSEB Bill': formData.bimonthlyBill,
+          'Solar System Preference': formData.capacity,
+          'Property Type': formData.propertyType,
+          'Roof & Special Requirements': formData.notes || 'None mentioned',
+          'Lead Source': 'Website Free Assessment Modal',
+          'Date & Time': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+        })
+      }).catch(err => console.log('Email delivery note:', err));
+    } catch (err) {
+      console.log('Email error:', err);
+    }
+
+    // 2. Open WhatsApp in new tab for instant connection
+    window.open(`https://wa.me/${COMPANY_INFO.whatsapp}?text=${msg}`, '_blank');
+
+    // 3. Trigger celebration & success screen
     confetti({
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 }
     });
 
-    // Also prepare WhatsApp message
-    const msg = `*NEW SOLAR SITE SURVEY REQUEST*%0A%0A` +
-      `👤 *Name:* ${formData.name}%0A` +
-      `📞 *Phone:* ${formData.phone}%0A` +
-      `📍 *Location:* ${formData.location || 'Kannur'}%0A` +
-      `🏠 *Property Type:* ${formData.propertyType}%0A` +
-      `⚡ *Bimonthly Bill:* ${formData.bimonthlyBill}%0A` +
-      `☀️ *System Interest:* ${formData.capacity}%0A` +
-      `📝 *Notes:* ${formData.notes || 'N/A'}`;
-
-    // Store in localStorage for persistence
+    // 4. Save to localStorage for safety
     try {
       const existing = JSON.parse(localStorage.getItem('horizon_survey_leads') || '[]');
       existing.push({ ...formData, timestamp: new Date().toISOString() });
@@ -46,16 +77,19 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
     } catch (err) {
       console.log(err);
     }
+
+    setIsSubmitting(false);
+    setSubmitted(true);
   };
 
   const openWhatsAppDirect = () => {
     const msg = `*NEW SOLAR SITE SURVEY REQUEST*%0A%0A` +
-      `👤 *Name:* ${formData.name}%0A` +
-      `📞 *Phone:* ${formData.phone}%0A` +
-      `📍 *Location:* ${formData.location || 'Kannur'}%0A` +
-      `🏠 *Property Type:* ${formData.propertyType}%0A` +
-      `⚡ *Bimonthly Bill:* ${formData.bimonthlyBill}%0A` +
-      `☀️ *System Interest:* ${formData.capacity}`;
+      `👤 *Name:* ${encodeURIComponent(formData.name)}%0A` +
+      `📞 *Phone:* ${encodeURIComponent(formData.phone)}%0A` +
+      `📍 *Location:* ${encodeURIComponent(formData.location || 'Kannur')}%0A` +
+      `🏠 *Property:* ${encodeURIComponent(formData.propertyType)}%0A` +
+      `⚡ *Bimonthly Bill:* ${encodeURIComponent(formData.bimonthlyBill)}%0A` +
+      `☀️ *System:* ${encodeURIComponent(formData.capacity)}`;
 
     window.open(`https://wa.me/${COMPANY_INFO.whatsapp}?text=${msg}`, '_blank');
   };
@@ -100,6 +134,10 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
                 Thank You, {formData.name || 'Valued Client'}!
               </h4>
 
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                <span>✓ Sent to WhatsApp & horizonsolarpowersolutions@gmail.com</span>
+              </div>
+
               <p className="text-sm text-slate-600 max-w-md mx-auto">
                 Your rooftop survey request has been received. Our solar engineer from our Mayyil office will call you shortly at <strong className="text-slate-900">{formData.phone}</strong>.
               </p>
@@ -111,7 +149,7 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
                   className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Send Request to WhatsApp Now</span>
+                  <span>Open WhatsApp Chat Directly</span>
                 </button>
 
                 <button
@@ -120,9 +158,9 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
                     setSubmitted(false);
                     onClose();
                   }}
-                  className="px-5 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition-colors"
+                  className="px-5 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold text-xs hover:bg-slate-50 transition-colors cursor-pointer"
                 >
-                  Done
+                  Close
                 </button>
               </div>
             </div>
@@ -227,10 +265,20 @@ export default function QuoteModal({ isOpen, onClose, preselectedCapacity = '' }
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-sm shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 disabled:opacity-75 text-white font-black text-sm shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2 transition-all cursor-pointer"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Free Survey Request</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Sending Your Request...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Submit Free Survey Request</span>
+                    </>
+                  )}
                 </button>
               </div>
 

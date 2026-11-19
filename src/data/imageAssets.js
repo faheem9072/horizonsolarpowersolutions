@@ -15,8 +15,8 @@ export const IMAGE_ASSETS = {
       height: 120,
     },
     logoFull: {
-      src: "/images/horizon-logo-transparent.png",
-      alt: "Horizon Solar Power Solutions Full Logo with Tagline",
+      src: "/images/horizon-emblem-transparent.png",
+      alt: "Horizon Solar Power Solutions Official Logo Emblem",
       width: 240,
       height: 240,
     },

@@ -38,11 +38,8 @@ export default function SolarCalculator({ onOpenQuoteModal }) {
     window.open(`https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
-  const handleScrollToLeadForm = () => {
-    const el = document.getElementById('lead-form');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else if (onOpenQuoteModal) {
+  const handleOpenSurvey = () => {
+    if (onOpenQuoteModal) {
       onOpenQuoteModal();
     }
   };
@@ -144,10 +141,10 @@ export default function SolarCalculator({ onOpenQuoteModal }) {
             </button>
 
             <button
-              onClick={handleScrollToLeadForm}
+              onClick={handleOpenSurvey}
               className="w-full py-2 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer text-center block"
             >
-              Or Submit Rooftop Inquiry Form Above ↑
+              Or Book Free Site Survey & Engineering Assessment
             </button>
           </div>
 

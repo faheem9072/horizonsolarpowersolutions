@@ -18,10 +18,7 @@ export default function Navbar({ onOpenQuoteModal }) {
   ];
 
   const handleFreeQuoteClick = () => {
-    const el = document.getElementById('lead-form');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else if (onOpenQuoteModal) {
+    if (onOpenQuoteModal) {
       onOpenQuoteModal();
     }
   };

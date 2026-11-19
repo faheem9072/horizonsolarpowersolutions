@@ -92,13 +92,13 @@ export default function ProjectsGallerySection({ onOpenQuoteModal }) {
           <p className="text-xs sm:text-sm text-slate-600 mb-3">
             Want to see how much solar capacity your rooftop can support in Kannur?
           </p>
-          <a
-            href="#lead-form"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-teal-800 hover:bg-teal-900 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
+          <button
+            onClick={onOpenQuoteModal}
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-teal-800 hover:bg-teal-900 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer"
           >
             <span>Book Free On-Site Shadow Assessment</span>
             <ArrowRight className="w-3.5 h-3.5" />
-          </a>
+          </button>
         </div>
 
       </div>

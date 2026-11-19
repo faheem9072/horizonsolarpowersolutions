@@ -24,7 +24,7 @@ export const COMPANY_INFO = {
   state: "Kerala",
   googleMapsUrl: "https://maps.google.com/?q=Mayyil+Kannur+Kerala",
   social: {
-    facebook: "https://facebook.com/HorizonsolarMayyil",
+    facebook: "https://www.facebook.com/share/1E3AHY1HXg/",
     instagram: "https://instagram.com/HORIZON_SOLAR_MAYYIL",
   },
   workingHours: "Mon - Sat: 9:00 AM - 6:30 PM",

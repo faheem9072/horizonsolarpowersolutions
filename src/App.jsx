@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import LeadFormSection from './components/LeadFormSection';
 import StatsStrip from './components/StatsStrip';
 import WhoWeAre from './components/WhoWeAre';
 import OurServices from './components/OurServices';
@@ -37,10 +36,7 @@ export default function App() {
       {/* 2. Hero Section with 4K Solar Array, Sunburst Graphic & Legal Disclaimer Note */}
       <Hero onOpenQuoteModal={handleOpenQuoteModal} />
 
-      {/* 3. High-Converting Fast Lead Form right below Hero */}
-      <LeadFormSection />
-
-      {/* 4. Trust Pillars & Assurance Strip (4 Factual Guarantees) */}
+      {/* 3. Trust Pillars & Assurance Strip (4 Factual Guarantees) */}
       <StatsStrip />
 
       {/* 5. Who We Are / About Section with GSTIN & Circular Accent */}

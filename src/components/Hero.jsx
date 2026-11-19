@@ -4,10 +4,7 @@ import { IMAGE_ASSETS } from '../data/imageAssets';
 
 export default function Hero({ onOpenQuoteModal }) {
   const handleGetStarted = () => {
-    const el = document.getElementById('lead-form');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else if (onOpenQuoteModal) {
+    if (onOpenQuoteModal) {
       onOpenQuoteModal();
     }
   };

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Play, CheckCircle2 } from 'lucide-react';
+import { Play, CheckCircle2, ArrowRight } from 'lucide-react';
 import { COMPANY_INFO } from '../data/solarData';
+import { IMAGE_ASSETS } from '../data/imageAssets';
 
 export default function WhoWeAre({ onOpenQuoteModal }) {
   return (
@@ -21,7 +22,7 @@ export default function WhoWeAre({ onOpenQuoteModal }) {
             </p>
 
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-              Our certified engineering team assists customers at every stage—from free on-site shadow assessment and KSEB net-metering liaisoning to Tier-1 module mounting and securing <strong>maximum Central Government subsidy of up to ₹78,000</strong> directly to your bank account under PM Surya Ghar Yojana.
+              Our certified engineering team assists customers at every stage—from free on-site shadow assessment and KSEB net-metering liaisoning to Tier-1 module mounting and securing direct DBT Central Government subsidies credited straight to your bank account under PM Surya Ghar Yojana.
             </p>
 
             <div className="pt-1 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-semibold text-slate-700">
@@ -36,12 +37,13 @@ export default function WhoWeAre({ onOpenQuoteModal }) {
             </div>
 
             <div className="pt-2">
-              <button
-                onClick={onOpenQuoteModal}
-                className="px-8 py-3 rounded-full text-xs font-black tracking-widest uppercase text-white bg-teal-800 hover:bg-teal-900 shadow-md transition-all cursor-pointer transform hover:-translate-y-0.5"
+              <a
+                href="#services"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-full text-xs font-black tracking-widest uppercase text-white bg-teal-800 hover:bg-teal-900 shadow-md transition-all cursor-pointer transform hover:-translate-y-0.5"
               >
-                LEARN MORE
-              </button>
+                <span>EXPLORE SERVICES</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
             </div>
 
           </div>
@@ -53,11 +55,14 @@ export default function WhoWeAre({ onOpenQuoteModal }) {
               {/* Outer Vibrant Orange Crescent Ring */}
               <div className="absolute inset-0 rounded-full border-[10px] sm:border-[12px] border-amber-500 shadow-lg" />
 
-              {/* Ultra High-Resolution Local Circular Photo */}
+              {/* Ultra High-Resolution Local Circular Photo with dimensions & lazy load */}
               <div className="absolute inset-2 sm:inset-3 rounded-full overflow-hidden shadow-2xl bg-slate-100">
                 <img
-                  src="/images/engineer-tablet.jpg"
-                  alt="Solar Engineer Reviewing Output on Tablet"
+                  src={IMAGE_ASSETS.about.src}
+                  alt={IMAGE_ASSETS.about.alt}
+                  width={IMAGE_ASSETS.about.width}
+                  height={IMAGE_ASSETS.about.height}
+                  loading="lazy"
                   className="w-full h-full object-cover object-center brightness-105 contrast-105"
                 />
               </div>
@@ -67,7 +72,7 @@ export default function WhoWeAre({ onOpenQuoteModal }) {
                 <a
                   href="#services"
                   className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-teal-800 text-white flex items-center justify-center shadow-xl hover:bg-teal-900 hover:scale-110 transition-all ring-4 ring-white"
-                  aria-label="View Services"
+                  aria-label="View Solar Services"
                 >
                   <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-white ml-0.5" />
                 </a>

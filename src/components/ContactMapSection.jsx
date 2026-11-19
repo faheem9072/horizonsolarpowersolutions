@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, Loader2, MessageCircle } from 'lucide-react';
+import { Send, CheckCircle2, Loader2, MessageCircle, Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { COMPANY_INFO } from '../data/solarData';
+import { IMAGE_ASSETS } from '../data/imageAssets';
 
 export default function ContactMapSection() {
   const [formData, setFormData] = useState({
@@ -26,6 +27,7 @@ export default function ContactMapSection() {
       `💬 *Message:* ${encodeURIComponent(formData.message || 'I would like to get a quote for rooftop solar in Kannur.')}`;
 
     // 1. Send Email Notification to horizonsolarpowersolutions@gmail.com
+    // [TODO: Replace with custom API / backend CRM webhook when ready]
     try {
       fetch(`https://formsubmit.co/ajax/${COMPANY_INFO.email}`, {
         method: 'POST',
@@ -65,25 +67,28 @@ export default function ContactMapSection() {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Map with Floating White Pin Card (Exact Replica of Screenshot 1) */}
+          {/* Left Column: Google Map with Floating White Pin Card */}
           <div className="lg:col-span-6 relative">
-            <div className="relative w-full h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-sm border border-slate-200 bg-slate-100">
+            <div className="relative w-full h-[380px] sm:h-[440px] rounded-2xl overflow-hidden shadow-sm border border-slate-200 bg-slate-100">
               
-              {/* Clean Map Background */}
+              {/* Google Maps Embed for Kandakkai Road, Mayyil, Kannur */}
               <iframe
-                title="Horizon Solar Location"
-                src="https://maps.google.com/maps?q=Mayyil+Kannur+Kerala&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                className="w-full h-full border-0 filter grayscale opacity-75 contrast-125"
+                title="Horizon Solar Power Solutions Location at Kandakkai Road, Mayyil, Kannur"
+                src="https://maps.google.com/maps?q=Kandakkai+Road+Mayyil+Kannur+Kerala+670602&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0 filter grayscale opacity-85 contrast-125"
                 allowFullScreen=""
                 loading="lazy"
               />
 
-              {/* White Pin Card (Exact Replica of Screenshot 1) */}
-              <div className="absolute top-12 left-6 right-6 sm:right-auto sm:max-w-xs bg-white rounded-xl shadow-xl p-3 border border-slate-200 z-10 animate-fadeIn">
+              {/* White Pin Card */}
+              <div className="absolute top-6 left-6 right-6 sm:right-auto sm:max-w-xs bg-white rounded-xl shadow-xl p-3.5 border border-slate-200 z-10 animate-fadeIn">
                 <div className="flex items-center gap-3">
                   <img
-                    src="/images/office-front.jpg"
-                    alt="Horizon Solar Mayyil"
+                    src={IMAGE_ASSETS.office.src}
+                    alt={IMAGE_ASSETS.office.alt}
+                    width={IMAGE_ASSETS.office.width}
+                    height={IMAGE_ASSETS.office.height}
+                    loading="lazy"
                     className="w-16 h-16 rounded-lg object-cover shrink-0 ring-1 ring-slate-200"
                   />
                   <div>
@@ -94,6 +99,25 @@ export default function ContactMapSection() {
                       Kandakkai Road, Mayyil <br />
                       Kannur, Kerala 670602
                     </p>
+                    <div className="mt-1 flex items-center gap-2">
+                      <a
+                        href={`tel:${COMPANY_INFO.phone1Raw}`}
+                        className="text-[10px] font-bold text-teal-800 hover:underline flex items-center gap-1"
+                      >
+                        <Phone className="w-2.5 h-2.5" />
+                        <span>Call Us</span>
+                      </a>
+                      <span className="text-slate-300">•</span>
+                      <a
+                        href={COMPANY_INFO.googleMapsUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[10px] font-bold text-teal-800 hover:underline flex items-center gap-0.5"
+                      >
+                        <span>Open Maps</span>
+                        <ExternalLink className="w-2.5 h-2.5" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -101,9 +125,21 @@ export default function ContactMapSection() {
             </div>
           </div>
 
-          {/* Right Column: Underlined Minimal Form with Circular Teal Send Button (Exact Replica of Screenshot 1) */}
+          {/* Right Column: Underlined Minimal Contact Form with Circular Teal Send Button */}
           <div className="lg:col-span-6 space-y-6">
             
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-widest text-teal-800 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+                DIRECT INQUIRY
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight mt-2">
+                CONTACT OUR MAYYIL OFFICE
+              </h2>
+              <p className="text-xs text-slate-500 mt-1">
+                Leave a message and our solar engineers will get back to you with custom feasibility and pricing.
+              </p>
+            </div>
+
             {submitted ? (
               <div className="p-8 rounded-2xl bg-slate-50 border border-teal-200 text-center space-y-3">
                 <div className="w-12 h-12 bg-teal-100 text-teal-800 rounded-full flex items-center justify-center mx-auto">
@@ -136,18 +172,18 @@ export default function ContactMapSection() {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                 
                 {/* Row 1: Your Name & Email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                   <div>
                     <label className="block text-xs text-slate-500 mb-1">
-                      Your Name
+                      Your Name *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="John Smith"
+                      placeholder="e.g. Ramesh Kumar"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full py-1.5 border-b border-slate-300 focus:border-teal-700 outline-none text-sm text-slate-800 transition-colors bg-transparent placeholder-slate-400 font-medium"
@@ -156,11 +192,11 @@ export default function ContactMapSection() {
 
                   <div>
                     <label className="block text-xs text-slate-500 mb-1">
-                      Email
+                      Email Address
                     </label>
                     <input
                       type="email"
-                      placeholder="johnsmith@gmail.com"
+                      placeholder="yourname@gmail.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full py-1.5 border-b border-slate-300 focus:border-teal-700 outline-none text-sm text-slate-800 transition-colors bg-transparent placeholder-slate-400 font-medium"
@@ -169,15 +205,15 @@ export default function ContactMapSection() {
                 </div>
 
                 {/* Row 2: City* & Phone* */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                   <div>
                     <label className="block text-xs text-slate-500 mb-1">
-                      City*
+                      Location / City in Kannur *
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="Kannur"
+                      placeholder="e.g. Mayyil, Taliparamba"
                       value={formData.city}
                       onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                       className="w-full py-1.5 border-b border-slate-300 focus:border-teal-700 outline-none text-sm text-slate-800 transition-colors bg-transparent placeholder-slate-400 font-medium"
@@ -186,12 +222,12 @@ export default function ContactMapSection() {
 
                   <div>
                     <label className="block text-xs text-slate-500 mb-1">
-                      Phone*
+                      Mobile Number *
                     </label>
                     <input
                       type="tel"
                       required
-                      placeholder="9947160826"
+                      placeholder="e.g. 9947160826"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full py-1.5 border-b border-slate-300 focus:border-teal-700 outline-none text-sm text-slate-800 transition-colors bg-transparent placeholder-slate-400 font-medium"
@@ -202,17 +238,18 @@ export default function ContactMapSection() {
                 {/* Row 3: Message* with Floating Circular Teal Send Button */}
                 <div className="relative pt-2">
                   <label className="block text-xs text-slate-500 mb-1">
-                    Message*
+                    Message / Roof Details *
                   </label>
                   <textarea
                     rows="2"
-                    placeholder="Hi, do you have a moment to talk abo..."
+                    required
+                    placeholder="Hi, I would like to inquire about 3kW On-Grid solar installation in Mayyil..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full py-1.5 pr-16 border-b border-slate-300 focus:border-teal-700 outline-none text-sm text-slate-800 transition-colors bg-transparent placeholder-slate-400 font-medium resize-none"
                   ></textarea>
 
-                  {/* Circular Teal Send Button (Exact Screenshot 1 Replica) */}
+                  {/* Circular Teal Send Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}

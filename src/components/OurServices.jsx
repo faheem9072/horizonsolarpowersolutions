@@ -1,11 +1,16 @@
 import React from 'react';
+import { ArrowRight } from 'lucide-react';
+import { IMAGE_ASSETS } from '../data/imageAssets';
 
 export default function OurServices({ onOpenQuoteModal }) {
   const services = [
     {
       title: "ON-GRID SOLAR SYSTEMS",
-      desc: "Connected to KSEB Net Metering. Export excess solar power and cut your electricity bills up to 90% with maximum Govt. Subsidy up to ₹78,000.",
-      image: "/images/service-ongrid.jpg",
+      desc: "Connected to KSEB Net Metering. Export surplus solar power back into the grid and cut your electric bills up to 90%* with direct Central Government solar subsidies.",
+      image: IMAGE_ASSETS.services.onGrid.src,
+      alt: IMAGE_ASSETS.services.onGrid.alt,
+      width: IMAGE_ASSETS.services.onGrid.width,
+      height: IMAGE_ASSETS.services.onGrid.height,
       icon: (
         <svg viewBox="0 0 24 24" className="w-6 h-6 text-teal-800 stroke-current fill-none stroke-2">
           <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -19,8 +24,11 @@ export default function OurServices({ onOpenQuoteModal }) {
     },
     {
       title: "OFF-GRID SOLAR SYSTEMS",
-      desc: "Independent power generation with solar battery storage. Enjoy 24/7 continuous electricity without fear of power outages or storms.",
-      image: "/images/service-offgrid.jpg",
+      desc: "Independent power generation with advanced solar battery storage. Enjoy 24/7 continuous electricity without fear of monsoon power outages or grid failures.",
+      image: IMAGE_ASSETS.services.offGrid.src,
+      alt: IMAGE_ASSETS.services.offGrid.alt,
+      width: IMAGE_ASSETS.services.offGrid.width,
+      height: IMAGE_ASSETS.services.offGrid.height,
       icon: (
         <svg viewBox="0 0 24 24" className="w-6 h-6 text-teal-800 stroke-current fill-none stroke-2">
           <circle cx="12" cy="12" r="4" />
@@ -37,8 +45,11 @@ export default function OurServices({ onOpenQuoteModal }) {
     },
     {
       title: "HYBRID SOLAR SYSTEMS",
-      desc: "The ultimate power solution combining KSEB net-metering benefits with battery backup for uninterrupted power security.",
-      image: "/images/service-hybrid.jpg",
+      desc: "The ultimate power solution combining KSEB net-metering cost benefits with emergency battery backup for complete uninterrupted power security.",
+      image: IMAGE_ASSETS.services.hybrid.src,
+      alt: IMAGE_ASSETS.services.hybrid.alt,
+      width: IMAGE_ASSETS.services.hybrid.width,
+      height: IMAGE_ASSETS.services.hybrid.height,
       icon: (
         <svg viewBox="0 0 24 24" className="w-6 h-6 text-teal-800 stroke-current fill-none stroke-2">
           <rect x="3" y="3" width="7" height="7" />
@@ -53,11 +64,14 @@ export default function OurServices({ onOpenQuoteModal }) {
   return (
     <section id="services" className="relative py-24 bg-[#181b1f] text-white overflow-hidden">
       
-      {/* Background Solar Array Silhouette Texture */}
+      {/* Background Solar Array Silhouette Texture with lazy load */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <img
-          src="/images/hero-solar.jpg"
-          alt="Solar texture"
+          src={IMAGE_ASSETS.hero.src}
+          alt="Solar texture background"
+          width={1920}
+          height={1080}
+          loading="lazy"
           className="w-full h-full object-cover"
         />
       </div>
@@ -87,7 +101,10 @@ export default function OurServices({ onOpenQuoteModal }) {
                 <div className="relative h-64 sm:h-72 w-full rounded-t-full overflow-hidden shadow-inner bg-slate-100">
                   <img
                     src={service.image}
-                    alt={service.title}
+                    alt={service.alt}
+                    width={service.width}
+                    height={service.height}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 brightness-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/15 to-transparent" />
@@ -100,22 +117,25 @@ export default function OurServices({ onOpenQuoteModal }) {
               </div>
 
               {/* Card Body */}
-              <div className="pt-10 pb-8 px-6 text-center text-slate-800 space-y-3">
-                <h3 className="text-sm sm:text-base font-black tracking-wider text-slate-950 uppercase">
-                  {service.title}
-                </h3>
+              <div className="pt-10 pb-8 px-6 text-center text-slate-800 space-y-3 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-sm sm:text-base font-black tracking-wider text-slate-950 uppercase">
+                    {service.title}
+                  </h3>
 
-                <p className="text-xs text-slate-600 leading-relaxed max-w-xs mx-auto">
-                  {service.desc}
-                </p>
+                  <p className="text-xs text-slate-600 leading-relaxed max-w-xs mx-auto mt-2">
+                    {service.desc}
+                  </p>
+                </div>
 
-                <div className="pt-2">
-                  <button
-                    onClick={onOpenQuoteModal}
-                    className="inline-block text-xs font-black tracking-widest text-teal-800 hover:text-teal-900 uppercase border-b-2 border-teal-800 pb-0.5 transition-all cursor-pointer"
+                <div className="pt-3">
+                  <a
+                    href="#packages"
+                    className="inline-flex items-center gap-1.5 text-xs font-black tracking-widest text-teal-800 hover:text-teal-900 uppercase border-b-2 border-teal-800 pb-0.5 transition-all"
                   >
-                    LEARN MORE
-                  </button>
+                    <span>VIEW PACKAGES</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </a>
                 </div>
               </div>
 

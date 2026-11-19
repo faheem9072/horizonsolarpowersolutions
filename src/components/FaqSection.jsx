@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { FAQS } from '../data/solarData';
+import { ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 
 export default function FaqSection() {
   const [openIdx, setOpenIdx] = useState(0);
 
-  // Take 4 essential FAQs tailored for Kerala customers
+  // 4 essential FAQs tailored for Kerala customers
   const basicFaqs = [
     {
       q: "How does KSEB Net Metering work in Kerala?",
-      a: "With an On-Grid solar plant, KSEB installs a bi-directional meter. During the day, your solar panels generate power and feed surplus electricity back into the KSEB grid, running your meter backwards. You draw grid power at night. At the end of the 2-month cycle, you only pay for the net units consumed!"
+      a: "With an On-Grid solar plant, KSEB installs a bi-directional net meter. During the day, your solar panels generate electricity and feed surplus energy back into the KSEB grid, running your meter backwards. You draw grid power at night. At the end of the 2-month cycle, you only pay for the net units consumed!"
     },
     {
       q: "How much subsidy can I receive under PM Surya Ghar Muft Bijli Yojana?",
-      a: "Under the scheme, residential consumers receive ₹30,000 for a 1 kW system, ₹60,000 for a 2 kW system, and a maximum of up to ₹78,000 for systems 3 kW and above. The subsidy is disbursed directly to your bank account via DBT."
+      a: "Under the scheme, residential consumers receive up to ₹30,000 for a 1 kW system, up to ₹60,000 for a 2 kW system, and a maximum of up to ₹78,000 for systems 3 kW and above. The subsidy is disbursed directly into your bank account via DBT upon KSEB net-meter commissioning."
     },
     {
       q: "How much shadow-free rooftop area is required for a 3 kW solar system?",
-      a: "A typical 3 kW solar rooftop system requires approximately 250 to 300 square feet of shadow-free space. It can be installed on concrete flat roofs, sloped tiled roofs, or GI metal sheet truss work."
+      a: "A typical 3 kW solar rooftop system requires approximately 250 to 300 square feet of shadow-free space. It can be installed on concrete flat roofs, sloped tiled roofs, or GI metal sheet truss structures."
     },
     {
       q: "Do solar panels generate electricity during the monsoon in Kannur?",
-      a: "Yes! High-efficiency Tier-1 Monocrystalline and Bifacial panels work on daylight photons, not heat. Even on overcast or rainy monsoon days, they continue producing 25% to 40% of their peak output from diffused ambient sunlight."
+      a: "Yes! High-efficiency Tier-1 Monocrystalline and Bifacial panels work on daylight photons, not heat. Even on overcast or rainy monsoon days in Kannur, they continue producing 25% to 40% of their peak output from diffused ambient sunlight."
     }
   ];
 
@@ -74,6 +73,14 @@ export default function FaqSection() {
               </div>
             );
           })}
+        </div>
+
+        {/* Small Disclaimer reminder */}
+        <div className="mt-8 text-center text-[11px] text-slate-500 max-w-xl mx-auto">
+          <span>Have more specific questions regarding your rooftop structure? </span>
+          <a href="#contact" className="font-bold text-teal-800 underline hover:text-teal-900">
+            Contact our Mayyil office
+          </a>
         </div>
 
       </div>

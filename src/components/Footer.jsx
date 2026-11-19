@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, MessageCircle, ShieldAlert } from 'lucide-react';
 import { COMPANY_INFO } from '../data/solarData';
+import { IMAGE_ASSETS } from '../data/imageAssets';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#1b1e22] text-slate-400 text-xs pt-16 pb-8 border-t border-slate-800">
+    <footer className="bg-[#1b1e22] text-slate-400 text-xs pt-16 pb-28 md:pb-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* 4 Columns */}
@@ -26,8 +27,11 @@ export default function Footer() {
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3.5">
               <img
-                src="/images/horizon-logo-transparent.png"
-                alt="Horizon Solar Power Solutions"
+                src={IMAGE_ASSETS.brand.logoFull.src}
+                alt={IMAGE_ASSETS.brand.logoFull.alt}
+                width={80}
+                height={80}
+                loading="lazy"
                 className="w-16 h-16 sm:w-20 sm:h-20 object-contain shrink-0"
               />
               <div>
@@ -44,7 +48,7 @@ export default function Footer() {
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Providing premier clean energy and rooftop solar photovoltaic engineering across Kannur & Kerala. Kandakkai Road, Mayyil (GSTIN: {COMPANY_INFO.gstin}).
+              Providing premier clean energy and rooftop solar photovoltaic engineering across Kannur & Northern Kerala. Kandakkai Road, Mayyil (GSTIN: {COMPANY_INFO.gstin}).
             </p>
 
             {/* Official Social Links (Facebook, Instagram & WhatsApp ONLY - No LinkedIn or G+) */}
@@ -76,7 +80,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-slate-800 hover:bg-[#25D366] text-slate-200 hover:text-white flex items-center justify-center transition-colors shadow-sm"
-                aria-label="WhatsApp"
+                aria-label="WhatsApp - Horizon Solar Mayyil"
                 title="Chat on WhatsApp"
               >
                 <MessageCircle className="w-4 h-4 fill-current" />
@@ -86,7 +90,7 @@ export default function Footer() {
                 href={`tel:${COMPANY_INFO.phone1Raw}`}
                 className="w-8 h-8 rounded-full bg-slate-800 hover:bg-teal-600 text-slate-200 hover:text-white flex items-center justify-center transition-colors shadow-sm"
                 aria-label="Call Directly"
-                title="Call 9947160826"
+                title="Call +91 99471 60826"
               >
                 <Phone className="w-3.5 h-3.5" />
               </a>
@@ -106,6 +110,7 @@ export default function Footer() {
               <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
               <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
               <li><a href="#packages" className="hover:text-white transition-colors">Packages</a></li>
+              <li><a href="#projects" className="hover:text-white transition-colors">Projects</a></li>
               <li><a href="#calculator" className="hover:text-white transition-colors">Calculator</a></li>
               <li><a href="#faq" className="hover:text-white transition-colors">FAQs</a></li>
               <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
@@ -123,17 +128,41 @@ export default function Footer() {
             <div className="space-y-2.5 text-xs pt-1">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                <span>{COMPANY_INFO.address}</span>
+                <a 
+                  href={COMPANY_INFO.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  {COMPANY_INFO.address}
+                </a>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-slate-400 shrink-0" />
-                <span>{COMPANY_INFO.phone1} / {COMPANY_INFO.phone2}</span>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <a href={`tel:${COMPANY_INFO.phone1Raw}`} className="hover:text-white transition-colors font-medium">
+                    {COMPANY_INFO.phone1}
+                  </a>
+                  <span>/</span>
+                  <a href={`tel:${COMPANY_INFO.phone2Raw}`} className="hover:text-white transition-colors font-medium">
+                    {COMPANY_INFO.phone2}
+                  </a>
+                </div>
               </div>
 
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-slate-400 shrink-0" />
-                <span className="break-all">{COMPANY_INFO.email}</span>
+                <a 
+                  href={`mailto:${COMPANY_INFO.email}`} 
+                  className="break-all hover:text-white transition-colors"
+                >
+                  {COMPANY_INFO.email}
+                </a>
+              </div>
+
+              <div className="pt-1 text-[11px] text-slate-400">
+                <span>Working Hours: {COMPANY_INFO.workingHours}</span>
               </div>
             </div>
           </div>
@@ -180,8 +209,17 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500 text-center md:text-left">
+        {/* Legal Disclaimer Note (Requirement 4) */}
+        <div id="disclaimer" className="pt-6 pb-2 text-[11px] text-slate-500 leading-relaxed border-b border-slate-800/80">
+          <p>
+            * Subsidy as per PM Surya Ghar Muft Bijli Yojana guidelines, subject to eligibility and government approval. 
+            Disbursement is processed directly into the consumer's bank account via DBT by MNRE / National Portal. 
+            Actual solar generation, electricity bill reduction (up to 90%), and financial savings depend on daily sun insolation, roof orientation, shadow conditions, and household power usage patterns.
+          </p>
+        </div>
+
+        {/* Bottom Bar with Developed by KORE */}
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500 text-center md:text-left">
           <div>
             © Copyright 2026. <span className="text-slate-300 font-bold">HORIZON SOLAR POWER SOLUTIONS</span>. All rights reserved. GSTIN: {COMPANY_INFO.gstin}.
           </div>
@@ -191,9 +229,9 @@ export default function Footer() {
               Developed by <strong className="text-teal-400 font-black tracking-wider uppercase">kore</strong>
             </span>
             <span className="text-slate-700">|</span>
-            <a href="#" className="hover:text-slate-300 transition-colors">Terms and Conditions</a>
+            <a href="#contact" className="hover:text-slate-300 transition-colors">Terms & Consultation</a>
             <span className="text-slate-700">|</span>
-            <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
+            <a href="#disclaimer" className="hover:text-slate-300 transition-colors">Subsidy Policy</a>
           </div>
         </div>
 

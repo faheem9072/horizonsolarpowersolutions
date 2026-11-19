@@ -10,14 +10,14 @@ export default function SolarCalculator({ onOpenQuoteModal }) {
 
   const calc = useMemo(() => {
     let kw = 2;
-    let subsidy = "Up to ₹60,000";
+    let subsidy = "Up to ₹60,000*";
     
     if (bill <= 2500) {
       kw = 1;
-      subsidy = "Up to ₹30,000";
+      subsidy = "Up to ₹30,000*";
     } else if (bill <= 4500) {
       kw = 2;
-      subsidy = "Up to ₹60,000";
+      subsidy = "Up to ₹60,000*";
     } else if (bill <= 8000) {
       kw = 3;
       subsidy = "Max Up to ₹78,000*";
@@ -38,11 +38,20 @@ export default function SolarCalculator({ onOpenQuoteModal }) {
     window.open(`https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  const handleScrollToLeadForm = () => {
+    const el = document.getElementById('lead-form');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (onOpenQuoteModal) {
+      onOpenQuoteModal();
+    }
+  };
+
   return (
     <section id="calculator" className="py-20 lg:py-24 bg-[#181b1f] text-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         
-        {/* Header (Inspired by GEPS Energy & EdiSun) */}
+        {/* Header */}
         <div className="text-center mb-10">
           <span className="text-[11px] font-bold uppercase tracking-widest text-teal-400 bg-teal-900/40 px-3 py-1 rounded-full border border-teal-500/30">
             INTERACTIVE ESTIMATOR
@@ -51,7 +60,7 @@ export default function SolarCalculator({ onOpenQuoteModal }) {
             SOLAR SAVINGS & SUBSIDY CALCULATOR
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-lg mx-auto">
-            Select your 2-month KSEB electricity bill to see your recommended rooftop capacity & central subsidy.
+            Select your 2-month KSEB electricity bill to see your recommended rooftop capacity & central subsidy under PM Surya Ghar.
           </p>
         </div>
 
@@ -76,6 +85,7 @@ export default function SolarCalculator({ onOpenQuoteModal }) {
               step="500"
               value={bill}
               onChange={(e) => setBill(Number(e.target.value))}
+              aria-label="2-Month KSEB Bill Slider"
               className="w-full h-3 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-teal-500"
             />
 
@@ -119,11 +129,11 @@ export default function SolarCalculator({ onOpenQuoteModal }) {
               <span className="text-xl sm:text-2xl font-black text-emerald-400 mt-1 block">
                 ₹{calc.monthlySavings}
               </span>
-              <span className="text-[10px] text-slate-400 block">~90% bill cut</span>
+              <span className="text-[10px] text-slate-400 block">~90% bill cut*</span>
             </div>
           </div>
 
-          {/* Action Button */}
+          {/* Action Buttons */}
           <div className="space-y-2.5 pt-1">
             <button
               onClick={handleWhatsApp}
@@ -134,10 +144,10 @@ export default function SolarCalculator({ onOpenQuoteModal }) {
             </button>
 
             <button
-              onClick={onOpenQuoteModal}
+              onClick={handleScrollToLeadForm}
               className="w-full py-2 text-xs text-slate-400 hover:text-white transition-colors cursor-pointer text-center block"
             >
-              Or Schedule Free Rooftop Inspection in Kannur →
+              Or Submit Rooftop Inquiry Form Above ↑
             </button>
           </div>
 

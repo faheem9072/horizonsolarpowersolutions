@@ -1,3 +1,12 @@
+/**
+ * Feature Flags Configuration
+ * Control visibility of sections pending verified client assets/completed installations.
+ */
+export const FEATURE_FLAGS = {
+  SHOW_PROJECTS: false,      // Set to true once verified installation photos are available
+  SHOW_TESTIMONIALS: false,  // Set to true once verified customer feedback is available
+};
+
 export const COMPANY_INFO = {
   name: "Horizon Solar Power Solutions",
   shortName: "Horizon Solar",

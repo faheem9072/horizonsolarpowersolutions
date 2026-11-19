@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import StickyMobileCall from './components/StickyMobileCall';
 import QuoteModal from './components/QuoteModal';
+import { FEATURE_FLAGS } from './data/solarData';
 
 export default function App() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -39,7 +40,7 @@ export default function App() {
       {/* 3. High-Converting Fast Lead Form right below Hero */}
       <LeadFormSection />
 
-      {/* 4. Stats Strip (Homes Powered, kW Installed) [PLACEHOLDER] */}
+      {/* 4. Trust Pillars & Assurance Strip (4 Factual Guarantees) */}
       <StatsStrip />
 
       {/* 5. Who We Are / About Section with GSTIN & Circular Accent */}
@@ -51,14 +52,18 @@ export default function App() {
       {/* 7. Popular Solar Packages (2kW, 3kW, 5kW) with WhatsApp Quote Action */}
       <ProjectsSection onOpenQuoteModal={handleOpenQuoteModal} />
 
-      {/* 8. Our Projects & Installed Systems Gallery [PLACEHOLDER] */}
-      <ProjectsGallerySection onOpenQuoteModal={handleOpenQuoteModal} />
+      {/* 8. Our Projects & Installed Systems Gallery (Hidden when SHOW_PROJECTS=false) */}
+      {FEATURE_FLAGS.SHOW_PROJECTS && (
+        <ProjectsGallerySection onOpenQuoteModal={handleOpenQuoteModal} />
+      )}
 
       {/* 9. Interactive Solar Savings & Subsidy Calculator */}
       <SolarCalculator onOpenQuoteModal={handleOpenQuoteModal} />
 
-      {/* 10. What Our Customers Say Testimonials [PLACEHOLDER] */}
-      <TestimonialsSection />
+      {/* 10. What Our Customers Say Testimonials (Hidden when SHOW_TESTIMONIALS=false) */}
+      {FEATURE_FLAGS.SHOW_TESTIMONIALS && (
+        <TestimonialsSection />
+      )}
 
       {/* 11. Frequently Asked Questions on KSEB & Subsidies */}
       <FaqSection />

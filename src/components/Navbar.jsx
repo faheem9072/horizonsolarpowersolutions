@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X, ArrowRight, MessageCircle } from 'lucide-react';
 import { IMAGE_ASSETS } from '../data/imageAssets';
-import { COMPANY_INFO } from '../data/solarData';
+import { COMPANY_INFO, FEATURE_FLAGS } from '../data/solarData';
 
 export default function Navbar({ onOpenQuoteModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,7 +11,7 @@ export default function Navbar({ onOpenQuoteModal }) {
     { name: 'ABOUT', href: '#about' },
     { name: 'SERVICES', href: '#services' },
     { name: 'PACKAGES', href: '#packages' },
-    { name: 'PROJECTS', href: '#projects' },
+    ...(FEATURE_FLAGS.SHOW_PROJECTS ? [{ name: 'PROJECTS', href: '#projects' }] : []),
     { name: 'CALCULATOR', href: '#calculator' },
     { name: 'FAQS', href: '#faq' },
     { name: 'CONTACT', href: '#contact' },

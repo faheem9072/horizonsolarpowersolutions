@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, MessageCircle, ShieldAlert } from 'lucide-react';
-import { COMPANY_INFO } from '../data/solarData';
+import { COMPANY_INFO, FEATURE_FLAGS } from '../data/solarData';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 
 export default function Footer() {
@@ -110,7 +110,9 @@ export default function Footer() {
               <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
               <li><a href="#services" className="hover:text-white transition-colors">Services</a></li>
               <li><a href="#packages" className="hover:text-white transition-colors">Packages</a></li>
-              <li><a href="#projects" className="hover:text-white transition-colors">Projects</a></li>
+              {FEATURE_FLAGS.SHOW_PROJECTS && (
+                <li><a href="#projects" className="hover:text-white transition-colors">Projects</a></li>
+              )}
               <li><a href="#calculator" className="hover:text-white transition-colors">Calculator</a></li>
               <li><a href="#faq" className="hover:text-white transition-colors">FAQs</a></li>
               <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>

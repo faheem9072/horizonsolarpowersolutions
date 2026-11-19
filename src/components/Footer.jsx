@@ -28,16 +28,16 @@ export default function Footer() {
               <img
                 src="/images/horizon-logo-transparent.png"
                 alt="Horizon Solar Power Solutions"
-                className="w-16 h-16 object-contain"
+                className="w-16 h-16 sm:w-20 sm:h-20 object-contain shrink-0"
               />
               <div>
-                <span className="text-xl font-black text-white tracking-tight leading-none block">
-                  HORIZON <span className="text-emerald-400">SOLAR</span>
+                <span className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-none block">
+                  HORIZON
                 </span>
-                <span className="text-[10px] font-bold text-teal-300 tracking-wider uppercase block mt-1">
-                  POWER SOLUTIONS
+                <span className="text-[11px] sm:text-xs font-black text-teal-400 tracking-[0.15em] uppercase block mt-1">
+                  SOLAR POWER SOLUTIONS
                 </span>
-                <span className="text-[8px] font-bold text-amber-400 tracking-wider uppercase block mt-0.5">
+                <span className="text-[8px] sm:text-[9px] font-bold text-amber-400 tracking-wider uppercase block mt-0.5">
                   CLEAN ENERGY • BRIGHTER TOMORROW
                 </span>
               </div>
@@ -181,14 +181,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500 text-center md:text-left">
           <div>
-            © Copyright 2026. HORIZON SOLAR. All rights reserved. Registered under GST: {COMPANY_INFO.gstin}.
+            © Copyright 2026. <span className="text-slate-300 font-bold">HORIZON SOLAR POWER SOLUTIONS</span>. All rights reserved. GSTIN: {COMPANY_INFO.gstin}.
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <span className="text-slate-400">
+              Developed by <strong className="text-teal-400 font-black tracking-wider uppercase">kore</strong>
+            </span>
+            <span className="text-slate-700">|</span>
             <a href="#" className="hover:text-slate-300 transition-colors">Terms and Conditions</a>
-            <span>|</span>
+            <span className="text-slate-700">|</span>
             <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
           </div>
         </div>

@@ -17,27 +17,26 @@ export default function Navbar({ onOpenQuoteModal }) {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 sm:h-24">
           
           {/* Official Horizon Solar Logo & Brand Identity */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="relative">
+          <a href="#" className="flex items-center gap-3 sm:gap-3.5 group">
+            <div className="relative shrink-0">
               <img 
                 src="/images/horizon-emblem-transparent.png" 
                 alt="Horizon Solar Power Solutions Logo" 
-                className="w-12 h-12 sm:w-14 sm:h-14 object-contain group-hover:scale-105 transition-transform"
+                className="w-14 h-14 sm:w-16 sm:h-16 md:w-[70px] md:h-[70px] object-contain group-hover:scale-105 transition-transform drop-shadow-xs"
               />
             </div>
             
-            <div className="flex flex-col">
-              <div className="flex items-center text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-none">
-                <span>HORIZON</span>
-                <span className="text-teal-700 ml-1.5">SOLAR</span>
-              </div>
-              <span className="text-[10px] font-bold tracking-widest text-emerald-800 uppercase mt-0.5">
+            <div className="flex flex-col justify-center">
+              <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-none">
+                HORIZON
+              </span>
+              <span className="text-[10px] sm:text-[11.5px] font-black tracking-[0.2em] text-teal-800 uppercase mt-1">
                 SOLAR POWER SOLUTIONS
               </span>
-              <span className="text-[8px] sm:text-[9px] font-semibold tracking-wider text-amber-600 uppercase">
+              <span className="text-[8px] sm:text-[9px] font-bold tracking-wider text-amber-600 uppercase mt-0.5">
                 CLEAN ENERGY • BRIGHTER TOMORROW
               </span>
             </div>
